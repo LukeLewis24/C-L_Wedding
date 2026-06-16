@@ -22,9 +22,9 @@ function GatePage() {
     console.log("Gate page effect. unlocked =", unlocked);
 
     if (unlocked) {
-      console.log("Already unlocked, navigating to invitation");
-      navigate({ to: "/invitation" });
-    }
+  console.log("Already unlocked, navigating to invitation");
+  window.location.href = "/invitation";
+}
   }, [navigate]);
 
   function onSubmit(e: FormEvent) {
@@ -41,17 +41,14 @@ function GatePage() {
 
       console.log("NAVIGATING TO INVITATION");
 
-      navigate({ to: "/invitation" });
+window.location.href = "/invitation";
     } else {
       setError(true);
       setShake(true);
       setTimeout(() => setShake(false), 500);
     }
   }
-function GatePage() {
-    console.log("GatePage rendered");
-    const navigate = useNavigate();
-}
+
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center px-6">
       <img
@@ -104,14 +101,10 @@ function GatePage() {
             </div>
           </div>
 
-          <button
-  type="button"
-  onClick={() => {
-    console.log("BUTTON CLICKED");
-    sessionStorage.setItem("cl-unlocked", "1");
-    console.log(sessionStorage.getItem("cl-unlocked"));
-  }}
->
+            <button
+                type="submit"
+                className="mt-6 inline-flex items-center justify-center rounded-full bg-sage px-10 py-3 text-sm uppercase tracking-[0.3em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
+            >
             Open
           </button>
 
