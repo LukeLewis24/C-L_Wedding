@@ -11,14 +11,16 @@ function InvitationPage() {
   const navigate = useNavigate();
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (sessionStorage.getItem("cl-unlocked") !== "1") {
-      navigate({ to: "/" });
-      return;
-    }
-    setReady(true);
-  }, [navigate]);
+useEffect(() => {
+  const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
+
+  if (!unlocked) {
+    navigate({ to: "/" });
+    return;
+  }
+
+  setReady(true);
+}, []);
 
   if (!ready) return null;
 
