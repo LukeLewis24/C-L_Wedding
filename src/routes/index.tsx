@@ -1,56 +1,17 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect, type FormEvent } from "react";
+import { useState } from "react";
 import botanical from "@/assets/botanical-bg.jpg";
 
 export const Route = createFileRoute("/")({
   component: GatePage,
 });
 
-const PASSWORD = "2027";
-
 function GatePage() {
   const navigate = useNavigate();
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
-  const [shake, setShake] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
-
-    console.log("Gate page effect. unlocked =", unlocked);
-
-    if (unlocked) {
-  console.log("Already unlocked, navigating to invitation");
-  window.location.href = "/invitation";
-}
-  }, [navigate]);
-
-  function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    if (value.trim() === PASSWORD) {
-      console.log("PASSWORD CORRECT");
-
-      sessionStorage.setItem("cl-unlocked", "1");
-
-      console.log(
-        "sessionStorage value:",
-        sessionStorage.getItem("cl-unlocked")
-      );
-
-      console.log("NAVIGATING TO INVITATION");
-
-window.location.href = "/invitation";
-    } else {
-      setError(true);
-      setShake(true);
-      setTimeout(() => setShake(false), 500);
-    }
-  }
+  const [fading, setFading] = useState(false);
 
   return (
-    <main className="relative min-h-screen overflow-hidden flex items-center justify-center px-6">
+    <main className={`relative min-h-screen overflow-hidden flex items-center justify-center px-6 transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100"}`}>
       <img
         src={botanical}
         alt=""
@@ -76,45 +37,22 @@ window.location.href = "/invitation";
           You're invited to something special. Please enter the secret word to open your invitation.
         </p>
 
-        <form
-          onSubmit={onSubmit}
-          className={`mt-10 ${shake ? "animate-[petal-fall_0s] motion-safe:[animation:wiggle_.4s_ease]" : ""}`}
-          style={shake ? { animation: "wiggle .4s ease" } : undefined}
-        >
-          <div className="group relative rounded-2xl bg-card/80 backdrop-blur-sm p-1.5 border border-sage/20 shadow-[var(--shadow-petal)]">
-            <div className="flex items-center gap-2 rounded-xl bg-ivory/70 px-5 py-4">
-              <svg className="h-5 w-5 text-sage/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <rect x="4" y="10" width="16" height="10" rx="2" />
-                <path d="M8 10V7a4 4 0 1 1 8 0v3" />
-              </svg>
-              <input
-                autoFocus
-                type="text"
-                inputMode="text"
-                autoComplete="off"
-                value={value}
-                onChange={(e) => { setValue(e.target.value); setError(false); }}
-                placeholder="Secret word"
-                aria-label="Secret word"
-                className="w-full bg-transparent text-center font-display text-2xl tracking-[0.3em] text-sage-deep placeholder:text-sage/30 placeholder:tracking-normal placeholder:font-sans placeholder:text-base outline-none"
-              />
-            </div>
-          </div>
-
-            <button
-                type="submit"
-                className="mt-6 inline-flex items-center justify-center rounded-full bg-sage px-10 py-3 text-sm uppercase tracking-[0.3em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
-            >
-            Open
+        <div className="mt-10">
+          <button
+            onClick={() => {
+              setFading(true);
+              setTimeout(() => {
+                navigate({ to: "/invitation" });
+              }, 450);
+            }}
+            className="inline-flex items-center justify-center rounded-full bg-sage px-10 py-3 text-sm uppercase tracking-[0.3em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
+          >
+            Open Invitation
           </button>
-
-          <p className={`mt-4 h-5 text-sm text-destructive transition-opacity ${error ? "opacity-100" : "opacity-0"}`}>
-            Not quite — try again.
-          </p>
-        </form>
+        </div>
 
         <p className="mt-8 text-xs text-muted-foreground/70 italic">
-          Hint: the year we say "I do".
+          Tap to open your invitation.
         </p>
       </section>
 
@@ -123,6 +61,11 @@ window.location.href = "/invitation";
           0%,100% { transform: translateX(0); }
           25% { transform: translateX(-8px); }
           75% { transform: translateX(8px); }
+        }
+        /* Use animation: fadeIn 0.6s ease both on invitation page container */
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(6px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </main>
