@@ -42,9 +42,10 @@ function GatePage() {
             onClick={() => {
               setFading(true);
               setTimeout(() => {
-                window.location.href = "/invitation";
+                navigate({ to: "/invitation" });
               }, 450);
             }}
+            type="button"
             className="inline-flex items-center justify-center rounded-full bg-sage px-10 py-3 text-sm uppercase tracking-[0.3em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
           >
             Open Invitation
