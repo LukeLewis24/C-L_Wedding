@@ -13,8 +13,14 @@ function InvitationPage() {
 
 useEffect(() => {
   const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
-  setReady(unlocked);
-}, []);
+
+  if (!unlocked) {
+    navigate({ to: "/" });
+    return;
+  }
+
+  setReady(true);
+}, [navigate]);
 
   if (!ready) {
     return null;

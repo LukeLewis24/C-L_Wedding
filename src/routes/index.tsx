@@ -14,11 +14,11 @@ function GatePage() {
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined" && sessionStorage.getItem("cl-unlocked") === "1") {
-      navigate({ to: "/invitation" });
-    }
-  }, [navigate]);
+ useEffect(() => {
+  if (sessionStorage.getItem("cl-unlocked") === "1") {
+    navigate({ to: "/invitation" });
+  }
+}, []);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
