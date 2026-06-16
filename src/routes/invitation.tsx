@@ -1,5 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 const pdfUrl = "/wedding-invite.pdf";
 import botanical from "@/assets/botanical-bg.jpg";
 
@@ -8,29 +7,11 @@ export const Route = createFileRoute("/invitation")({
 });
 
 function InvitationPage() {
-  const navigate = useNavigate();
-  const [ready, setReady] = useState(false);
-
-useEffect(() => {
-  const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
-
-  if (!unlocked) {
-    setReady(true); // prevent blank render loop
-    navigate({ to: "/", replace: true });
-    return;
-  }
-
-  setReady(true);
-}, [navigate]);
-
-  if (!ready) {
-    return null;
-  }
 
   const petals = Array.from({ length: 14 });
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-screen overflow-hidden animate-[fadeIn_0.6s_ease_both]">
       {/* Decorative background */}
       <img
         src={botanical}
