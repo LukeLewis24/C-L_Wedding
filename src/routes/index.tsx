@@ -42,7 +42,7 @@ function GatePage() {
             onClick={() => {
               setFading(true);
               setTimeout(() => {
-                navigate({ to: "/invitation" });
+                window.location.href = "/invitation";
               }, 450);
             }}
             className="inline-flex items-center justify-center rounded-full bg-sage px-10 py-3 text-sm uppercase tracking-[0.3em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
