@@ -13,16 +13,12 @@ function InvitationPage() {
 
 useEffect(() => {
   const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
-
-  if (!unlocked) {
-    navigate({ to: "/" });
-    return;
-  }
-
-  setReady(true);
+  setReady(unlocked);
 }, []);
 
-  if (!ready) return null;
+  if (!ready) {
+    return null;
+  }
 
   const petals = Array.from({ length: 14 });
 
