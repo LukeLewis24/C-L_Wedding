@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import pdfAsset from "@/assets/wedding-invite.pdf";
+import pdfUrl from "@/assets/wedding-invite.pdf";
 import botanical from "@/assets/botanical-bg.jpg";
 
 export const Route = createFileRoute("/invitation")({
