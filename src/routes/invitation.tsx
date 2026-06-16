@@ -15,7 +15,8 @@ useEffect(() => {
   const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
 
   if (!unlocked) {
-    navigate({ to: "/" });
+    setReady(true); // prevent blank render loop
+    navigate({ to: "/", replace: true });
     return;
   }
 
