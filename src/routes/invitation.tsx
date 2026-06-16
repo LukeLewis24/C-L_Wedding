@@ -133,7 +133,7 @@ function InvitationPage() {
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <a
-              href={pdfAsset.url}
+              href={pdfUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-sage px-8 py-3 text-sm uppercase tracking-[0.25em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
@@ -141,7 +141,7 @@ function InvitationPage() {
               View full screen
             </a>
             <a
-              href={pdfAsset.url}
+              href={pdfUrl}
               download="Catherine-and-Luke-Invitation.pdf"
               className="inline-flex items-center gap-2 rounded-full border border-sage/40 bg-ivory px-8 py-3 text-sm uppercase tracking-[0.25em] text-sage-deep transition hover:bg-secondary"
             >
