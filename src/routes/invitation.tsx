@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import pdfAsset from "@/assets/wedding-invite.pdf.asset.json";
+import pdfAsset from "@/assets/wedding-invite.pdf";
 import botanical from "@/assets/botanical-bg.jpg";
 
 export const Route = createFileRoute("/invitation")({
@@ -111,7 +111,7 @@ function InvitationPage() {
             <div className="rounded-2xl bg-ivory border border-sage/25 p-3 sm:p-4 shadow-[var(--shadow-petal)]">
               <div className="rounded-xl overflow-hidden bg-secondary/50 ring-1 ring-sage/15">
                 <object
-                  data={`${pdfAsset.url}#view=FitH&toolbar=0&navpanes=0`}
+                  data={`${pdfUrl}#view=FitH&toolbar=0&navpanes=0`}
                   type="application/pdf"
                   className="block w-full h-[78vh] min-h-[600px] bg-ivory"
                   aria-label="Wedding invitation PDF"
@@ -119,7 +119,7 @@ function InvitationPage() {
                   <div className="p-10 text-center">
                     <p className="text-sage-deep">Your browser can't display the PDF inline.</p>
                     <a
-                      href={pdfAsset.url}
+                      href={pdfUrl}
                       className="mt-4 inline-block underline text-sage"
                       target="_blank" rel="noreferrer"
                     >
