@@ -14,16 +14,33 @@ function GatePage() {
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
 
- useEffect(() => {
-  if (sessionStorage.getItem("cl-unlocked") === "1") {
-    navigate({ to: "/invitation" });
-  }
-}, []);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const unlocked = sessionStorage.getItem("cl-unlocked") === "1";
+
+    console.log("Gate page effect. unlocked =", unlocked);
+
+    if (unlocked) {
+      console.log("Already unlocked, navigating to invitation");
+      navigate({ to: "/invitation" });
+    }
+  }, [navigate]);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (value.trim() === PASSWORD) {
+      console.log("PASSWORD CORRECT");
+
       sessionStorage.setItem("cl-unlocked", "1");
+
+      console.log(
+        "sessionStorage value:",
+        sessionStorage.getItem("cl-unlocked")
+      );
+
+      console.log("NAVIGATING TO INVITATION");
+
       navigate({ to: "/invitation" });
     } else {
       setError(true);
