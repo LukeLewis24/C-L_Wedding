@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catherine & Luke</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="bg"></div>
+<div class="petals"></div>
+  <div class="center">
+    <div class="card" id="card">
+
+      <h1>Catherine & Luke</h1>
+      <div class="subtitle">You're invited to something special</div>
+
+      <button onclick="openInvite()">
+        OPEN INVITATION
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    function openInvite() {
+      const card = document.getElementById("card");
+
+      card.classList.add("fade-out");
+
+      setTimeout(() => {
+        window.location.href = "invite.html";
+      }, 700);
+    }
+  </script>
+<script>
+  const petalsContainer = document.querySelector('.petals');
+
+  const petalCount = 18;
+
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+
+    // random positioning
+    petal.style.left = Math.random() * 100 + 'vw';
+
+    // random size
+    const size = 6 + Math.random() * 8;
+    petal.style.width = size + 'px';
+    petal.style.height = size * 0.6 + 'px';
+
+    // random speed
+    const duration = 8 + Math.random() * 10;
+    petal.style.animationDuration = duration + 's';
+
+    // random delay so they don’t sync
+    petal.style.animationDelay = Math.random() * 5 + 's';
+
+    petalsContainer.appendChild(petal);
+  }
+</script>
+</body>
+</html>
