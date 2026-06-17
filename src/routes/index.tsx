@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import botanical from "@/assets/botanical-bg.jpg";
 
@@ -7,22 +7,19 @@ export const Route = createFileRoute("/")({
 });
 
 function GatePage() {
-  const navigate = useNavigate();
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setFading(true);
 
-      const navTimer = setTimeout(() => {
-        navigate({ to: "/invitation" });
+      setTimeout(() => {
+        window.location.href = "/invitation";
       }, 500);
-
-      return () => clearTimeout(navTimer);
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, [navigate]);
+  }, []);
 
   return (
     <main className={`relative min-h-screen overflow-hidden flex items-center justify-center px-6 transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100"}`}>
