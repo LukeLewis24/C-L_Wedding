@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "echo 'no build step needed'",
-    "deploy": "wrangler deploy"
+    "build": "mkdir -p dist && cp -r *.html *.css *.js assets dist/ 2>/dev/null || true",
+    "deploy": "bun run build && wrangler deploy"
   }
 }
