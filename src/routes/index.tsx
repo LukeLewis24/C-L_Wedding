@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import botanical from "@/assets/botanical-bg.jpg";
 
 export const Route = createFileRoute("/")({
@@ -9,6 +9,20 @@ export const Route = createFileRoute("/")({
 function GatePage() {
   const navigate = useNavigate();
   const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFading(true);
+
+      const navTimer = setTimeout(() => {
+        navigate({ to: "/invitation" });
+      }, 500);
+
+      return () => clearTimeout(navTimer);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
 
   return (
     <main className={`relative min-h-screen overflow-hidden flex items-center justify-center px-6 transition-opacity duration-500 ${fading ? "opacity-0" : "opacity-100"}`}>
@@ -34,26 +48,11 @@ function GatePage() {
         </h1>
 
         <p className="mt-6 text-sm text-muted-foreground max-w-xs mx-auto">
-          You're invited to something special. Please enter the secret word to open your invitation.
+          You're invited to something special. Your invitation will open shortly.
         </p>
 
-        <div className="mt-10">
-          <button
-            onClick={() => {
-              setFading(true);
-              setTimeout(() => {
-                navigate({ to: "/invitation" });
-              }, 450);
-            }}
-            type="button"
-            className="inline-flex items-center justify-center rounded-full bg-sage px-10 py-3 text-sm uppercase tracking-[0.3em] text-ivory transition hover:bg-sage-deep shadow-[var(--shadow-soft)]"
-          >
-            Open Invitation
-          </button>
-        </div>
-
         <p className="mt-8 text-xs text-muted-foreground/70 italic">
-          Tap to open your invitation.
+          Opening invitation…
         </p>
       </section>
 
