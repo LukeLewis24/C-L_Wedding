@@ -39,7 +39,15 @@ body {
 
 /* Card */
 .card {
-  max-width: 650pc;
+  background: rgba(255,255,255,0.88);
+  padding: 42px;
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  max-width: 850px;
+  width: 100%;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.8s ease;
 }
 
 /* Fade states */
